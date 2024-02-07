@@ -29,12 +29,12 @@ func (s *session) AllCols() *Session {
 }
 
 func (s *session) And(x0 any, x1 ...any) *Session {
-	s.Session.And(x0, x1)
+	s.Session.And(x0, x1...)
 	return &Session{s}
 }
 
 func (s *session) Asc(x0 ...string) *Session {
-	s.Session.Asc(x0)
+	s.Session.Asc(x0...)
 	return &Session{s}
 }
 
@@ -49,7 +49,7 @@ func (s *session) BufferSize(x0 int) *Session {
 }
 
 func (s *session) Cascade(x0 ...bool) *Session {
-	s.Session.Cascade(x0)
+	s.Session.Cascade(x0...)
 	return &Session{s}
 }
 
@@ -59,7 +59,7 @@ func (s *session) Charset(x0 string) *Session {
 }
 
 func (s *session) Cols(x0 ...string) *Session {
-	s.Session.Cols(x0)
+	s.Session.Cols(x0...)
 	return &Session{s}
 }
 
@@ -74,17 +74,17 @@ func (s *session) ContextCache(x0 contexts.ContextCache) *Session {
 }
 
 func (s *session) Decr(x0 string, x1 ...any) *Session {
-	s.Session.Decr(x0, x1)
+	s.Session.Decr(x0, x1...)
 	return &Session{s}
 }
 
 func (s *session) Desc(x0 ...string) *Session {
-	s.Session.Desc(x0)
+	s.Session.Desc(x0...)
 	return &Session{s}
 }
 
 func (s *session) Distinct(x0 ...string) *Session {
-	s.Session.Distinct(x0)
+	s.Session.Distinct(x0...)
 	return &Session{s}
 }
 
@@ -109,12 +109,12 @@ func (s *session) ID(x0 any) *Session {
 }
 
 func (s *session) In(x0 string, x1 ...any) *Session {
-	s.Session.In(x0, x1)
+	s.Session.In(x0, x1...)
 	return &Session{s}
 }
 
 func (s *session) Incr(x0 string, x1 ...any) *Session {
-	s.Session.Incr(x0, x1)
+	s.Session.Incr(x0, x1...)
 	return &Session{s}
 }
 
@@ -124,27 +124,27 @@ func (s *session) IndexHint(x0 string, x1 string, x2 string) *Session {
 }
 
 func (s *session) Join(x0 string, x1 any, x2 any, x3 ...any) *Session {
-	s.Session.Join(x0, x1, x2, x3)
+	s.Session.Join(x0, x1, x2, x3...)
 	return &Session{s}
 }
 
 func (s *session) Limit(x0 int, x1 ...int) *Session {
-	s.Session.Limit(x0, x1)
+	s.Session.Limit(x0, x1...)
 	return &Session{s}
 }
 
 func (s *session) MustCols(x0 ...string) *Session {
-	s.Session.MustCols(x0)
+	s.Session.MustCols(x0...)
 	return &Session{s}
 }
 
 func (s *session) MustLogSQL(x0 ...bool) *Session {
-	s.Session.MustLogSQL(x0)
+	s.Session.MustLogSQL(x0...)
 	return &Session{s}
 }
 
 func (s *session) NoAutoCondition(x0 ...bool) *Session {
-	s.Session.NoAutoCondition(x0)
+	s.Session.NoAutoCondition(x0...)
 	return &Session{s}
 }
 
@@ -169,27 +169,27 @@ func (s *session) NoVersionCheck() *Session {
 }
 
 func (s *session) NotIn(x0 string, x1 ...any) *Session {
-	s.Session.NotIn(x0, x1)
+	s.Session.NotIn(x0, x1...)
 	return &Session{s}
 }
 
 func (s *session) Nullable(x0 ...string) *Session {
-	s.Session.Nullable(x0)
+	s.Session.Nullable(x0...)
 	return &Session{s}
 }
 
 func (s *session) Omit(x0 ...string) *Session {
-	s.Session.Omit(x0)
+	s.Session.Omit(x0...)
 	return &Session{s}
 }
 
 func (s *session) Or(x0 any, x1 ...any) *Session {
-	s.Session.Or(x0, x1)
+	s.Session.Or(x0, x1...)
 	return &Session{s}
 }
 
 func (s *session) OrderBy(x0 any, x1 ...any) *Session {
-	s.Session.OrderBy(x0, x1)
+	s.Session.OrderBy(x0, x1...)
 	return &Session{s}
 }
 
@@ -199,7 +199,7 @@ func (s *session) Prepare() *Session {
 }
 
 func (s *session) SQL(x0 any, x1 ...any) *Session {
-	s.Session.SQL(x0, x1)
+	s.Session.SQL(x0, x1...)
 	return &Session{s}
 }
 
@@ -229,11 +229,11 @@ func (s *session) Unscoped() *Session {
 }
 
 func (s *session) UseBool(x0 ...string) *Session {
-	s.Session.UseBool(x0)
+	s.Session.UseBool(x0...)
 	return &Session{s}
 }
 
 func (s *session) Where(x0 any, x1 ...any) *Session {
-	s.Session.Where(x0, x1)
+	s.Session.Where(x0, x1...)
 	return &Session{s}
 }

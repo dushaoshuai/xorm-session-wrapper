@@ -15,7 +15,8 @@ func main() {
 }
 
 type in struct {
-	Type string
+	Type       string
+	IsVariadic bool
 }
 
 type method struct {
@@ -51,11 +52,13 @@ func methods() (methods []method) {
 
 			if j == numIn-1 && methodType.IsVariadic() {
 				m.Ins = append(m.Ins, in{
-					Type: "..." + inType.Elem().String(),
+					Type:       "..." + inType.Elem().String(),
+					IsVariadic: true,
 				})
 			} else {
 				m.Ins = append(m.Ins, in{
-					Type: inType.String(),
+					Type:       inType.String(),
+					IsVariadic: false,
 				})
 			}
 		}
