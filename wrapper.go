@@ -1,3 +1,5 @@
-package xorm_session_wrapper
+package wrapper
 
-type Session struct{}
+type Session struct {
+	*session
+}
