@@ -15,13 +15,13 @@ func main() {
 }
 
 type in struct {
-	Type       string
-	IsVariadic bool
+	Type string
 }
 
 type method struct {
-	Name string
-	Ins  []in
+	Name       string
+	Ins        []in
+	IsVariadic bool
 }
 
 func methods() (methods []method) {
@@ -30,6 +30,7 @@ func methods() (methods []method) {
 	for i := 0; i < sessType.NumMethod(); i++ {
 		methodType := sessType.Method(i).Type
 
+		// overrides only methods that return exclusively a *xorm.Session
 		if methodType.NumOut() != 1 {
 			continue
 		}
@@ -38,8 +39,9 @@ func methods() (methods []method) {
 		}
 
 		m := method{
-			Name: sessType.Method(i).Name,
-			Ins:  nil,
+			Name:       sessType.Method(i).Name,
+			Ins:        nil,
+			IsVariadic: methodType.IsVariadic(),
 		}
 
 		numIn := methodType.NumIn()
@@ -52,13 +54,11 @@ func methods() (methods []method) {
 
 			if j == numIn-1 && methodType.IsVariadic() {
 				m.Ins = append(m.Ins, in{
-					Type:       "..." + inType.Elem().String(),
-					IsVariadic: true,
+					Type: "..." + inType.Elem().String(),
 				})
 			} else {
 				m.Ins = append(m.Ins, in{
-					Type:       inType.String(),
-					IsVariadic: false,
+					Type: inType.String(),
 				})
 			}
 		}

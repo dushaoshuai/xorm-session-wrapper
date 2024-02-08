@@ -20,6 +20,7 @@ type session struct {
 func (s *session) {{.Name}}(
 
 {{- $l := len .Ins -}}
+{{- $isVariadic := .IsVariadic}}
 
 {{- range $i, $e := .Ins -}}
 
@@ -32,7 +33,7 @@ x{{$i}} {{$e.Type}}{{if lt $i (subtract $l 1)}}, {{end}}
 
 {{- range $i, $e := .Ins -}}
 
-x{{$i}}{{if lt $i (subtract $l 1)}}, {{else if $e.IsVariadic}}...{{end}}
+x{{$i}}{{if lt $i (subtract $l 1)}}, {{else if $isVariadic}}...{{end}}
 
 {{- end -}}
 
