@@ -13,226 +13,271 @@ type session struct {
 	*xorm.Session
 }
 
+// After overrides (*xorm.Session).After method.
 func (s *session) After(x0 func(any)) *Session {
 	s.Session.After(x0)
 	return &Session{s}
 }
 
+// Alias overrides (*xorm.Session).Alias method.
 func (s *session) Alias(x0 string) *Session {
 	s.Session.Alias(x0)
 	return &Session{s}
 }
 
+// AllCols overrides (*xorm.Session).AllCols method.
 func (s *session) AllCols() *Session {
 	s.Session.AllCols()
 	return &Session{s}
 }
 
+// And overrides (*xorm.Session).And method.
 func (s *session) And(x0 any, x1 ...any) *Session {
 	s.Session.And(x0, x1...)
 	return &Session{s}
 }
 
+// Asc overrides (*xorm.Session).Asc method.
 func (s *session) Asc(x0 ...string) *Session {
 	s.Session.Asc(x0...)
 	return &Session{s}
 }
 
+// Before overrides (*xorm.Session).Before method.
 func (s *session) Before(x0 func(any)) *Session {
 	s.Session.Before(x0)
 	return &Session{s}
 }
 
+// BufferSize overrides (*xorm.Session).BufferSize method.
 func (s *session) BufferSize(x0 int) *Session {
 	s.Session.BufferSize(x0)
 	return &Session{s}
 }
 
+// Cascade overrides (*xorm.Session).Cascade method.
 func (s *session) Cascade(x0 ...bool) *Session {
 	s.Session.Cascade(x0...)
 	return &Session{s}
 }
 
+// Charset overrides (*xorm.Session).Charset method.
 func (s *session) Charset(x0 string) *Session {
 	s.Session.Charset(x0)
 	return &Session{s}
 }
 
+// Cols overrides (*xorm.Session).Cols method.
 func (s *session) Cols(x0 ...string) *Session {
 	s.Session.Cols(x0...)
 	return &Session{s}
 }
 
+// Context overrides (*xorm.Session).Context method.
 func (s *session) Context(x0 context.Context) *Session {
 	s.Session.Context(x0)
 	return &Session{s}
 }
 
+// ContextCache overrides (*xorm.Session).ContextCache method.
 func (s *session) ContextCache(x0 contexts.ContextCache) *Session {
 	s.Session.ContextCache(x0)
 	return &Session{s}
 }
 
+// Decr overrides (*xorm.Session).Decr method.
 func (s *session) Decr(x0 string, x1 ...any) *Session {
 	s.Session.Decr(x0, x1...)
 	return &Session{s}
 }
 
+// Desc overrides (*xorm.Session).Desc method.
 func (s *session) Desc(x0 ...string) *Session {
 	s.Session.Desc(x0...)
 	return &Session{s}
 }
 
+// Distinct overrides (*xorm.Session).Distinct method.
 func (s *session) Distinct(x0 ...string) *Session {
 	s.Session.Distinct(x0...)
 	return &Session{s}
 }
 
+// ForUpdate overrides (*xorm.Session).ForUpdate method.
 func (s *session) ForUpdate() *Session {
 	s.Session.ForUpdate()
 	return &Session{s}
 }
 
+// GroupBy overrides (*xorm.Session).GroupBy method.
 func (s *session) GroupBy(x0 string) *Session {
 	s.Session.GroupBy(x0)
 	return &Session{s}
 }
 
+// Having overrides (*xorm.Session).Having method.
 func (s *session) Having(x0 string) *Session {
 	s.Session.Having(x0)
 	return &Session{s}
 }
 
+// ID overrides (*xorm.Session).ID method.
 func (s *session) ID(x0 any) *Session {
 	s.Session.ID(x0)
 	return &Session{s}
 }
 
+// In overrides (*xorm.Session).In method.
 func (s *session) In(x0 string, x1 ...any) *Session {
 	s.Session.In(x0, x1...)
 	return &Session{s}
 }
 
+// Incr overrides (*xorm.Session).Incr method.
 func (s *session) Incr(x0 string, x1 ...any) *Session {
 	s.Session.Incr(x0, x1...)
 	return &Session{s}
 }
 
+// IndexHint overrides (*xorm.Session).IndexHint method.
 func (s *session) IndexHint(x0 string, x1 string, x2 string) *Session {
 	s.Session.IndexHint(x0, x1, x2)
 	return &Session{s}
 }
 
+// Join overrides (*xorm.Session).Join method.
 func (s *session) Join(x0 string, x1 any, x2 any, x3 ...any) *Session {
 	s.Session.Join(x0, x1, x2, x3...)
 	return &Session{s}
 }
 
+// Limit overrides (*xorm.Session).Limit method.
 func (s *session) Limit(x0 int, x1 ...int) *Session {
 	s.Session.Limit(x0, x1...)
 	return &Session{s}
 }
 
+// MustCols overrides (*xorm.Session).MustCols method.
 func (s *session) MustCols(x0 ...string) *Session {
 	s.Session.MustCols(x0...)
 	return &Session{s}
 }
 
+// MustLogSQL overrides (*xorm.Session).MustLogSQL method.
 func (s *session) MustLogSQL(x0 ...bool) *Session {
 	s.Session.MustLogSQL(x0...)
 	return &Session{s}
 }
 
+// NoAutoCondition overrides (*xorm.Session).NoAutoCondition method.
 func (s *session) NoAutoCondition(x0 ...bool) *Session {
 	s.Session.NoAutoCondition(x0...)
 	return &Session{s}
 }
 
+// NoAutoTime overrides (*xorm.Session).NoAutoTime method.
 func (s *session) NoAutoTime() *Session {
 	s.Session.NoAutoTime()
 	return &Session{s}
 }
 
+// NoCache overrides (*xorm.Session).NoCache method.
 func (s *session) NoCache() *Session {
 	s.Session.NoCache()
 	return &Session{s}
 }
 
+// NoCascade overrides (*xorm.Session).NoCascade method.
 func (s *session) NoCascade() *Session {
 	s.Session.NoCascade()
 	return &Session{s}
 }
 
+// NoVersionCheck overrides (*xorm.Session).NoVersionCheck method.
 func (s *session) NoVersionCheck() *Session {
 	s.Session.NoVersionCheck()
 	return &Session{s}
 }
 
+// NotIn overrides (*xorm.Session).NotIn method.
 func (s *session) NotIn(x0 string, x1 ...any) *Session {
 	s.Session.NotIn(x0, x1...)
 	return &Session{s}
 }
 
+// Nullable overrides (*xorm.Session).Nullable method.
 func (s *session) Nullable(x0 ...string) *Session {
 	s.Session.Nullable(x0...)
 	return &Session{s}
 }
 
+// Omit overrides (*xorm.Session).Omit method.
 func (s *session) Omit(x0 ...string) *Session {
 	s.Session.Omit(x0...)
 	return &Session{s}
 }
 
+// Or overrides (*xorm.Session).Or method.
 func (s *session) Or(x0 any, x1 ...any) *Session {
 	s.Session.Or(x0, x1...)
 	return &Session{s}
 }
 
+// OrderBy overrides (*xorm.Session).OrderBy method.
 func (s *session) OrderBy(x0 any, x1 ...any) *Session {
 	s.Session.OrderBy(x0, x1...)
 	return &Session{s}
 }
 
+// Prepare overrides (*xorm.Session).Prepare method.
 func (s *session) Prepare() *Session {
 	s.Session.Prepare()
 	return &Session{s}
 }
 
+// SQL overrides (*xorm.Session).SQL method.
 func (s *session) SQL(x0 any, x1 ...any) *Session {
 	s.Session.SQL(x0, x1...)
 	return &Session{s}
 }
 
+// Select overrides (*xorm.Session).Select method.
 func (s *session) Select(x0 string) *Session {
 	s.Session.Select(x0)
 	return &Session{s}
 }
 
+// SetExpr overrides (*xorm.Session).SetExpr method.
 func (s *session) SetExpr(x0 string, x1 any) *Session {
 	s.Session.SetExpr(x0, x1)
 	return &Session{s}
 }
 
+// StoreEngine overrides (*xorm.Session).StoreEngine method.
 func (s *session) StoreEngine(x0 string) *Session {
 	s.Session.StoreEngine(x0)
 	return &Session{s}
 }
 
+// Table overrides (*xorm.Session).Table method.
 func (s *session) Table(x0 any) *Session {
 	s.Session.Table(x0)
 	return &Session{s}
 }
 
+// Unscoped overrides (*xorm.Session).Unscoped method.
 func (s *session) Unscoped() *Session {
 	s.Session.Unscoped()
 	return &Session{s}
 }
 
+// UseBool overrides (*xorm.Session).UseBool method.
 func (s *session) UseBool(x0 ...string) *Session {
 	s.Session.UseBool(x0...)
 	return &Session{s}
 }
 
+// Where overrides (*xorm.Session).Where method.
 func (s *session) Where(x0 any, x1 ...any) *Session {
 	s.Session.Where(x0, x1...)
 	return &Session{s}

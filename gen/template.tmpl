@@ -34,6 +34,7 @@ type session struct {
     {{$l := len .Ins}}
     {{$isVariadic := .IsVariadic}}
 
+    // {{.Name}} overrides (*xorm.Session).{{.Name}} method.
     func (s *session) {{.Name}}({{template "ins" .Ins}}) *Session {
 	    s.Session.{{.Name}}({{template "pass" .}})
 	    return &Session{s}
