@@ -1,6 +1,7 @@
 package main
 
 import (
+	_ "embed"
 	"os"
 	"reflect"
 	"text/template"
@@ -10,8 +11,11 @@ import (
 
 //go:generate bash ./gen.sh
 
+//go:embed template.tmpl
+var tmpl string
+
 func main() {
-	gen(methods())
+	gen(getMethods())
 }
 
 type in struct {
@@ -24,7 +28,9 @@ type method struct {
 	IsVariadic bool
 }
 
-func methods() (methods []method) {
+type methods []method
+
+func getMethods() (methods []method) {
 	sessType := reflect.TypeOf((*xorm.Session)(nil))
 
 	for i := 0; i < sessType.NumMethod(); i++ {
