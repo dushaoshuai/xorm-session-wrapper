@@ -28,8 +28,6 @@ type method struct {
 	IsVariadic bool
 }
 
-type methods []method
-
 func getMethods() (methods []method) {
 	sessType := reflect.TypeOf((*xorm.Session)(nil))
 
