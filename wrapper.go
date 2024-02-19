@@ -87,7 +87,3 @@ func (s *Session) Like(column string, val string) *Session {
 	)
 	return s
 }
-
-func Foo() (string, error) {
-	return "", nil
-}
