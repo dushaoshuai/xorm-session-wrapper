@@ -146,8 +146,7 @@ func TestSession_In(t *testing.T) {
 			var got []testTable
 			err := sess.In("id", tt.values...).Find(&got)
 			if err != nil {
-				t.Errorf("In() error = %v", err)
-				return
+				t.Fatalf("In() error = %v", err)
 			}
 			if !deepEqual(got, tt.want) {
 				t.Errorf("In() got = %v, want %v", got, tt.want)
@@ -179,11 +178,40 @@ func TestSession_Equal(t *testing.T) {
 			var got []testTable
 			err := sess.Equal("id", tt.value).Find(&got)
 			if err != nil {
-				t.Errorf("Equal() error = %v", err)
-				return
+				t.Fatalf("Equal() error = %v", err)
 			}
 			if !deepEqual(got, tt.want) {
 				t.Errorf("Equal() got = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestSession_Between(t *testing.T) {
+	engine := mustGetXormEngine()
+	sess := NewSession(engine.NewSession())
+
+	tests := []struct {
+		name   string
+		ranger *Ranger
+		want   []testTable
+	}{
+		{currLine(), nil, allTests},
+		{currLine(), &Ranger{1, 2}, []testTable{test1, test2}},
+		{currLine(), &Ranger{1, 7}, allTests},
+		{currLine(), &Ranger{-1, 8}, allTests},
+		{currLine(), &Ranger{2, 1}, nil},
+		{currLine(), &Ranger{8, -1}, nil},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			var got []testTable
+			err := sess.Between("id", tt.ranger).Find(&got)
+			if err != nil {
+				t.Fatalf("Between() error = %v", err)
+			}
+			if !deepEqual(got, tt.want) {
+				t.Errorf("Between() got = %v, want %v", got, tt.want)
 			}
 		})
 	}
