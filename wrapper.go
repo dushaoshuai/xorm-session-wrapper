@@ -26,11 +26,14 @@ func NewSession(embedded *xorm.Session) *Session {
 // In overrides (*xorm.Session).In method.
 func (s *Session) In(column string, values ...any) *Session {
 	if len(values) <= 0 {
-		s.Session.In(column, values...)
 		return s
 	}
 
 	rv := reflect.ValueOf(values[0])
+	if !rv.IsValid() {
+		return s
+	}
+
 	if rv.Kind() != reflect.Slice {
 		s.Session.In(column, values...)
 		return s
@@ -83,4 +86,8 @@ func (s *Session) Like(column string, val string) *Session {
 		"%"+val+"%",
 	)
 	return s
+}
+
+func Foo() (string, error) {
+	return "", nil
 }
