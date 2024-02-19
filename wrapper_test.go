@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"os"
 	"reflect"
+	"runtime"
 	"slices"
 	"testing"
 	"time"
@@ -113,32 +114,32 @@ func TestSession_In(t *testing.T) {
 		values []any
 		want   []testTable
 	}{
-		{"", nil, allTests},
-		{"", []any{}, allTests},
-		{"", []any{nil}, allTests},
-		{"", []any{nil, nil}, allTests},
-		{"", []any{[]string(nil)}, allTests},
-		{"", []any{[]string{}}, allTests},
-		{"", []any{[]string{"a"}}, nil},
-		{"", []any{[]int64(nil)}, allTests},
-		{"", []any{[]int64{}}, allTests},
-		{"", []any{[]int64{1}}, []testTable{test1}},
-		{"", []any{[]int64{1, 2}}, []testTable{test1, test2}},
-		{"", []any{[]int64{1, 2, 3}}, []testTable{test1, test2, test3}},
-		{"", []any{[]int64{1, 2, 3, 4}}, []testTable{test1, test2, test3, test4}},
-		{"", []any{[]int64{1, 2, 3, 4, 5, 6, 7}}, allTests},
-		{"", []any{[]int64{1, 2, 3, 4, 5, 6, 7, 8}}, allTests},
-		{"", []any{[]int64{1, 77}}, []testTable{test1}},
-		{"", []any{[]int64{77}}, nil},
-		{"", []any{1}, []testTable{test1}},
-		{"", []any{1, 2}, []testTable{test1, test2}},
-		{"", []any{1, 2, 3}, []testTable{test1, test2, test3}},
-		{"", []any{1, 2, 3, 4}, []testTable{test1, test2, test3, test4}},
-		{"", []any{1, 2, 3, 4, 5, 6, 7}, allTests},
-		{"", []any{1, 2, 3, 4, 5, 6, 7, 8}, allTests},
-		{"", []any{1, "a"}, []testTable{test1}},
-		{"", []any{1, 77}, []testTable{test1}},
-		{"", []any{77}, nil},
+		{currLine(), nil, allTests},
+		{currLine(), []any{}, allTests},
+		{currLine(), []any{nil}, allTests},
+		{currLine(), []any{nil, nil}, allTests},
+		{currLine(), []any{[]string(nil)}, allTests},
+		{currLine(), []any{[]string{}}, allTests},
+		{currLine(), []any{[]string{"a"}}, nil},
+		{currLine(), []any{[]int64(nil)}, allTests},
+		{currLine(), []any{[]int64{}}, allTests},
+		{currLine(), []any{[]int64{1}}, []testTable{test1}},
+		{currLine(), []any{[]int64{1, 2}}, []testTable{test1, test2}},
+		{currLine(), []any{[]int64{1, 2, 3}}, []testTable{test1, test2, test3}},
+		{currLine(), []any{[]int64{1, 2, 3, 4}}, []testTable{test1, test2, test3, test4}},
+		{currLine(), []any{[]int64{1, 2, 3, 4, 5, 6, 7}}, allTests},
+		{currLine(), []any{[]int64{1, 2, 3, 4, 5, 6, 7, 8}}, allTests},
+		{currLine(), []any{[]int64{1, 77}}, []testTable{test1}},
+		{currLine(), []any{[]int64{77}}, nil},
+		{currLine(), []any{1}, []testTable{test1}},
+		{currLine(), []any{1, 2}, []testTable{test1, test2}},
+		{currLine(), []any{1, 2, 3}, []testTable{test1, test2, test3}},
+		{currLine(), []any{1, 2, 3, 4}, []testTable{test1, test2, test3, test4}},
+		{currLine(), []any{1, 2, 3, 4, 5, 6, 7}, allTests},
+		{currLine(), []any{1, 2, 3, 4, 5, 6, 7, 8}, allTests},
+		{currLine(), []any{1, "a"}, []testTable{test1}},
+		{currLine(), []any{1, 77}, []testTable{test1}},
+		{currLine(), []any{77}, nil},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -169,4 +170,9 @@ func deepEqual(x, y []testTable) bool {
 	slices.SortFunc(y, cmp)
 
 	return reflect.DeepEqual(x, y)
+}
+
+func currLine() string {
+	_, _, line, _ := runtime.Caller(1)
+	return fmt.Sprintf("line%d", line)
 }
