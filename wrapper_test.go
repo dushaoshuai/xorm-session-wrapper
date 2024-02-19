@@ -38,7 +38,7 @@ var (
 	test4    = testTable{ID: 4, Name: "cgo"}
 	test5    = testTable{ID: 5, Name: "goroutine"}
 	test6    = testTable{ID: 6, Name: "goland"}
-	test7    = testTable{ID: 7, Name: "gofmt"}
+	test7    = testTable{ID: 7, Name: "go_%go"}
 	allTests = []testTable{test1, test2, test3, test4, test5, test6, test7}
 )
 
@@ -228,11 +228,16 @@ func TestSession_Like(t *testing.T) {
 		want []testTable
 	}{
 		{currLine(), "", allTests},
+		{currLine(), "  ", allTests},
 		{currLine(), "a", []testTable{test2, test6}},
 		{currLine(), "go", allTests},
 		{currLine(), "c", []testTable{test4}},
 		{currLine(), "cg", []testTable{test4}},
 		{currLine(), "xx", nil},
+		{currLine(), "_", []testTable{test7}},
+		{currLine(), "%", []testTable{test7}},
+		{currLine(), "_%", []testTable{test7}},
+		{currLine(), "&", nil},
 	}
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {

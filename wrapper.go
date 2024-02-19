@@ -85,6 +85,11 @@ func (s *Session) Like(column string, val string) *Session {
 	if val == "" {
 		return s
 	}
+
+	// escape wildcard characters
+	val = strings.ReplaceAll(val, `_`, `\_`)
+	val = strings.ReplaceAll(val, `%`, `\%`)
+
 	s.Session.Where(
 		fmt.Sprintf("%s LIKE ?", column),
 		"%"+val+"%",
