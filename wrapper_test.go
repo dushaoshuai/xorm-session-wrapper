@@ -23,7 +23,8 @@ const (
 )
 
 type testTable struct {
-	ID int64 `xorm:"'id' not null pk autoincr comment('primary key') BIGINT"`
+	ID   int64  `xorm:"'id' not null pk autoincr comment('primary key') BIGINT"`
+	Name string `xorm:"'name' not null VARCHAR(50)"`
 }
 
 func (m *testTable) TableName() string {
@@ -31,13 +32,13 @@ func (m *testTable) TableName() string {
 }
 
 var (
-	test1    = testTable{ID: 1}
-	test2    = testTable{ID: 2}
-	test3    = testTable{ID: 3}
-	test4    = testTable{ID: 4}
-	test5    = testTable{ID: 5}
-	test6    = testTable{ID: 6}
-	test7    = testTable{ID: 7}
+	test1    = testTable{ID: 1, Name: "go"}
+	test2    = testTable{ID: 2, Name: "golang"}
+	test3    = testTable{ID: 3, Name: "gopher"}
+	test4    = testTable{ID: 4, Name: "cgo"}
+	test5    = testTable{ID: 5, Name: "goroutine"}
+	test6    = testTable{ID: 6, Name: "goland"}
+	test7    = testTable{ID: 7, Name: "gofmt"}
 	allTests = []testTable{test1, test2, test3, test4, test5, test6, test7}
 )
 
@@ -212,6 +213,36 @@ func TestSession_Between(t *testing.T) {
 			}
 			if !deepEqual(got, tt.want) {
 				t.Errorf("Between() got = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestSession_Like(t *testing.T) {
+	engine := mustGetXormEngine()
+	sess := NewSession(engine.NewSession())
+
+	tests := []struct {
+		name string
+		val  string
+		want []testTable
+	}{
+		{currLine(), "", allTests},
+		{currLine(), "a", []testTable{test2, test6}},
+		{currLine(), "go", allTests},
+		{currLine(), "c", []testTable{test4}},
+		{currLine(), "cg", []testTable{test4}},
+		{currLine(), "xx", nil},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			var got []testTable
+			err := sess.Like("name", tt.val).Find(&got)
+			if err != nil {
+				t.Fatalf("Like() error = %v", err)
+			}
+			if !deepEqual(got, tt.want) {
+				t.Errorf("Like() got = %v, want %v", got, tt.want)
 			}
 		})
 	}
