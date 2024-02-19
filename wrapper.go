@@ -48,6 +48,10 @@ func (s *Session) In(column string, values ...any) *Session {
 }
 
 func (s *Session) Equal(column string, val any) *Session {
+	if val == nil {
+		return s
+	}
+
 	rt := reflect.TypeOf(val)
 	if val == reflect.Zero(rt).Interface() {
 		return s

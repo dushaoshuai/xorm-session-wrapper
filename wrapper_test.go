@@ -156,6 +156,39 @@ func TestSession_In(t *testing.T) {
 	}
 }
 
+func TestSession_Equal(t *testing.T) {
+	engine := mustGetXormEngine()
+	sess := NewSession(engine.NewSession())
+
+	tests := []struct {
+		name  string
+		value any
+		want  []testTable
+	}{
+		{currLine(), nil, allTests},
+		{currLine(), "", allTests},
+		{currLine(), "a", nil},
+		{currLine(), -1, nil},
+		{currLine(), 0, allTests},
+		{currLine(), 1, []testTable{test1}},
+		{currLine(), 2, []testTable{test2}},
+		{currLine(), 77, nil},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			var got []testTable
+			err := sess.Equal("id", tt.value).Find(&got)
+			if err != nil {
+				t.Errorf("Equal() error = %v", err)
+				return
+			}
+			if !deepEqual(got, tt.want) {
+				t.Errorf("Equal() got = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
 func deepEqual(x, y []testTable) bool {
 	cmp := func(a, b testTable) int {
 		if a.ID < b.ID {
